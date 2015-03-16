@@ -6,6 +6,13 @@ class InteractiveCSS
 
   constructor: ->
 
+    $('h1').click (e) ->
+      console.log "header click"
+      h = $(e.target)
+      h.addClass 'expand'
+      h.on 'webkitAnimationEnd', ->
+        h.removeClass 'expand'
+
     $('.button').click (e) ->
       btn = $(e.target)
       newState = !btn.hasClass 'active'
