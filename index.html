@@ -9,24 +9,39 @@
 
 <body>
   <div id="container">
-    <h1>CSS Demo</h1>
-    <nav>
+    <nav id="main-nav">
       <ul>
-        <li data-rotate="rotate-up" class="button">up</li>
-        <li data-rotate="rotate-down" class="button">down</li>
-        <li data-rotate="rotate-left" class="button">left</li>
-        <li data-rotate="rotate-right" class="button">right</li>
+        <li data-href=".cube-page">cube</li>
+        <li data-href=".foo">something else</li>
       </ul>
     </nav>
 
-    <div id="cube" class="cube">
-      <div class="face1">1</div>
-      <div class="face2">2</div>
-      <div class="face3">3</div>
-      <div class="face4">4</div>
-      <div class="face5">5</div>
-      <div class="face6">6</div>
-    </div>
+    <section class="tab cube-page visible">
+      <h1>CSS Demo</h1>
+      <nav id="cube-nav">
+        <ul>
+          <li data-rotate="rotate-up" class="button">up</li>
+          <li data-rotate="rotate-down" class="button">down</li>
+          <li data-rotate="rotate-left" class="button">left</li>
+          <li data-rotate="rotate-right" class="button">right</li>
+        </ul>
+      </nav>
+
+      <div id="cube" class="cube">
+        <div class="face1">1</div>
+        <div class="face2">2</div>
+        <div class="face3">3</div>
+        <div class="face4">4</div>
+        <div class="face5">5</div>
+        <div class="face6">6</div>
+      </div>
+
+    </section>
+
+    <section class="tab foo">
+      <h1>???</h1>
+      <p>afkaansjkdsnfdskjnsf ksdnfsjkdfnsdkjfsnkjfnsdkjf </p>
+    </section>
   </div>
 </body>
 

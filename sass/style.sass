@@ -26,7 +26,36 @@ h1
     -webkit-animation-duration: 3s
     -webkit-animation-timing-function: ease-out
 
-nav
+section
+  opacity: 0
+  visibility: hidden
+  position: absolute
+  left: 0
+  right: 0
+  transition: all .4s ease-out
+
+  &.visible
+    visibility: visible
+    opacity: 1
+    display: block
+
+nav#main-nav
+  ul
+    li
+      display: inline-block
+      list-style-type: none
+      margin: 3px
+      padding: 5px
+      background: #eee
+      border-radius: 4px
+      cursor: pointer
+      transition: all .2s ease-in
+
+      &:hover
+        background: green
+        color: white
+
+nav#cube-nav
   ul
     li.button
       display: inline-block

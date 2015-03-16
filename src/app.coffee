@@ -22,3 +22,8 @@ class InteractiveCSS
 
       if newState # we want to spin dat cube
         $('.cube').addClass btn.data('rotate')
+
+    $('#main-nav li').click (e) ->
+      href = $(e.target).data 'href'
+      $('.tab').removeClass 'visible'
+      $(href).addClass 'visible'
