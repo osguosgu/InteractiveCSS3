@@ -8,39 +8,68 @@
 </head>
 
 <body>
+
   <div id="container">
     <nav id="main-nav">
       <ul>
-        <li data-href=".cube-page">cube</li>
-        <li data-href=".foo">something else</li>
+        <li data-href=".description">Project progress</li>
+
+        <li data-href=".cube-page">Demo</li>
       </ul>
     </nav>
 
-    <section class="tab cube-page visible">
+    <section class="tab cube-page">
       <h1>CSS Demo</h1>
+
+      <aside id="controls">
+        <label>perspective:
+          <input id="perspective" type ="range" min ="100" max="800" step ="10" value ="800">
+        </label>
+      </aside>
       <nav id="cube-nav">
         <ul>
-          <li data-rotate="rotate-up" class="button">up</li>
+          <li data-rotate="rotate-up-left" class="button">up-right</li>
           <li data-rotate="rotate-down" class="button">down</li>
           <li data-rotate="rotate-left" class="button">left</li>
           <li data-rotate="rotate-right" class="button">right</li>
+          <li class="button" id="cube-ring-switch">cube</li>
+          <li class="button active" id="backfaces">backfaces</li>
         </ul>
       </nav>
 
-      <div id="cube" class="cube">
-        <div class="face1">1</div>
-        <div class="face2">2</div>
-        <div class="face3">3</div>
-        <div class="face4">4</div>
-        <div class="face5">5</div>
-        <div class="face6">6</div>
+      <div id="stage">
+        <div class="shape cube backfaces">
+          <div class="face1">1</div>
+          <div class="face2">2</div>
+          <div class="face3">3</div>
+          <div class="face4">4</div>
+          <div class="face5">5</div>
+          <div class="face6">6</div>
+        </div>
       </div>
-
     </section>
 
-    <section class="tab foo">
-      <h1>???</h1>
-      <p>afkaansjkdsnfdskjnsf ksdnfsjkdfnsdkjfsnkjfnsdkjf </p>
+    <section class="tab description visible">
+      <h1>Research idea</h1>
+      <ul>
+        <li>Researching and demoing possibilities of CSS3 in impressive web design.</li>
+        <li>Use cases of the different CSS3 features for web advertisement.</li>
+        <li>Relevancy of using CSS3 instead of JavaScript libraries in different cases.</li>
+      </ul>
+
+      <h1>Project progress</h1>
+      <ul>
+        <li>The project is on schedule.</li>
+        <li>Initial research phase is done and we are on the implementation phase now.</li>
+        <li>Workload is divided equally and the workflow is good.</li>
+      </ul>
+
+      <h1>What next?</h1>
+      <ul>
+        <li>We will continue the implementing the demo.</li>
+        <li>We will start planning and writing the final report paper.</li>
+        <li>The goal is to write paper using the findings during the implementation of our demo.</li>
+      </ul>
     </section>
   </div>
 </body>

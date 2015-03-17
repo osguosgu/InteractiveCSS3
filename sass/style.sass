@@ -2,6 +2,9 @@
 @import animations
 
 $cube-face: 200px
+$translate: 173px
+$cube-expand: 75px
+$scale: 0.5
 
 *
   box-sizing: border-box
@@ -14,10 +17,29 @@ html, body
 body
   background: #000
   -webkit-animation-name: pulse
-  -webkit-animation-duration: 30s
+  -webkit-animation-duration: 20s
   -webkit-animation-iteration-count: infinite
   -webkit-animation-timing-function: linear
+  overflow: hidden
 
+.description
+  padding: 20px
+  font-size: 16px
+  text-align: left
+
+  h1
+    font-size: 24px
+
+#controls
+  position: fixed
+  top: 10px
+  right: 10px
+  background: rgba(black, 0.9)
+  color: white
+  width: 200px
+  padding: 10px
+  border-radius: 10px
+  border: rgba(white, 0.5) 1px solid
 
 h1, h2, h3, h4, h5, h6
   font-family: 'Helvetica Neue', Helvetica, sans-serif
@@ -28,7 +50,7 @@ h1
 
   &.expand
     -webkit-animation-name: expand
-    -webkit-animation-duration: 3s
+    -webkit-animation-duration: 1s
     -webkit-animation-timing-function: ease-out
 
 #container
@@ -41,7 +63,7 @@ h1
   max-width: 600px
   text-align: center
   background: white
-  box-shadow: 5px 5px 5px #aaa
+  box-shadow: 5px 5px 5px rgba(white, 0.4)
   height: 90%
 
 section
@@ -79,13 +101,13 @@ nav#cube-nav
       display: inline-block
       list-style-type: none
       background: black
-      height: 100px
-      width: 100px
+      height: 80px
+      width: 80px
       margin: 2px
       color: white
       transition: all .2s ease-in
-      border-radius: 100px
-      line-height: 100px
+      border-radius: 80px
+      line-height: 80px
       box-shadow: 10px 10px 10px #ddd
       cursor: pointer
 
@@ -96,9 +118,68 @@ nav#cube-nav
       &.active
         background: green
 
+
+#stage
+  width: 100%
+  height: 400px
+  -webkit-transition: -webkit-transform 0.5s
+  -webkit-transform-style: preserve-3d
+  -webkit-transform: translateZ(-200px)
+  margin: 0 auto
+  position: relative
+  -webkit-perspective: 800
+  -webkit-perspective-origin: 50% 225px
+
+  &:hover div
+    color: rgba(white, 0.8)
+
+
+.shape
+  position: absolute
+  width: 100%
+  height: 100%
+  -webkit-transform-style: preserve-3d
+
+  // Cube faces
+  div
+    position: absolute
+    width: $cube-face
+    height: $cube-face
+    border: 1px solid #ccc
+    background: rgba(200, 200, 200, 0.9)
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2)
+    text-align: center
+    line-height: $cube-face
+    font-size: 100px
+    border-radius: 10px
+    -webkit-transition: -webkit-transform 1s, opacity 1s, color .5s
+    -webkit-backface-visibility: hidden
+
+  &.backfaces div
+    -webkit-backface-visibility: visible
+
+  .face1
+    background: url(http://i.ytimg.com/vi/tntOCGkgt98/maxresdefault.jpg)
+    background-size: cover
+    color: rgba(black, 0.5)
+    img
+      width: $cube-face
+      height: $cube-face
+  .face2
+    background: rgba(#0f0, 0.8)
+  .face3
+    background: rgba(#f00, 0.8)
+  .face4
+    background: rgba(#00f, 0.8)
+  .face5
+    background: rgba(teal, 0.8)
+  .face6
+    background: rgba(yellow, 0.8)
+
 .cube
-  margin-left: 100px
-  margin-top: 100px
+  -webkit-animation: rotate-up-left 8s infinite linear
+
+
 
   &.rotate-up
     -webkit-animation-name: rotate-up
@@ -132,19 +213,6 @@ nav#cube-nav
     -webkit-transform-style: preserve-3d
     -webkit-transform-origin: 150px 150px 0
 
-  // Cube faces
-  div
-    position: absolute
-    width: $cube-face
-    height: $cube-face
-    border: 1px solid #ccc
-    background: rgba(200, 200, 200, 0.9)
-    box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2)
-    text-align: center
-    line-height: $cube-face
-    font-size: 100px
-    border-radius: 10px
-
   .face1
     -webkit-transform: translateZ($cube-face / 2)
   .face2
@@ -157,3 +225,53 @@ nav#cube-nav
     -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ($cube-face / 2)
   .face6
     -webkit-transform: rotateX(-90deg) translateZ($cube-face / 2)
+
+#stage:hover
+  .cube
+    .face1
+      -webkit-transform: translateZ($cube-face / 2 + $cube-expand)
+    .face2
+      -webkit-transform: rotateY(90deg) translateZ($cube-face / 2 + $cube-expand)
+    .face3
+      -webkit-transform: rotateY(90deg) rotateX(90deg) translateZ($cube-face / 2 + $cube-expand)
+    .face4
+      -webkit-transform: rotateY(180deg) rotateZ(90deg) translateZ($cube-face / 2 + $cube-expand)
+    .face5
+      -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ($cube-face / 2 + $cube-expand)
+    .face6
+      -webkit-transform: rotateX(-90deg) translateZ($cube-face / 2 + $cube-expand)
+
+
+.ring
+  margin-left: 100px
+  margin-top: 100px
+  -webkit-animation: rotate-left 8s infinite linear
+
+  .face1
+    -webkit-transform: translateZ($translate)
+  .face2
+    -webkit-transform: rotateY(60deg) translateZ($translate)
+  .face3
+    -webkit-transform: rotateY(120deg) translateZ($translate)
+  .face4
+    -webkit-transform: rotateY(180deg) translateZ($translate)
+  .face5
+    -webkit-transform: rotateY(240deg) translateZ($translate)
+  .face6
+    -webkit-transform: rotateY(300deg) translateZ($translate)
+
+#stage:hover
+  .ring
+    .face1
+      -webkit-transform: translateZ($translate) scale($scale)
+    .face2
+      -webkit-transform: rotateY(60deg) translateZ($translate) scale($scale)
+    .face3
+      -webkit-transform: rotateY(120deg) translateZ($translate) scale($scale)
+    .face4
+      -webkit-transform: rotateY(180deg) translateZ($translate) scale($scale)
+    .face5
+      -webkit-transform: rotateY(240deg) translateZ($translate) scale($scale)
+    .face6
+      -webkit-transform: rotateY(300deg) translateZ($translate) scale($scale)
+
