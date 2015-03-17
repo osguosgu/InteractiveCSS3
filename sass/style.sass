@@ -1,6 +1,11 @@
 @import url(http://fonts.googleapis.com/css?family=Cabin+Sketch:400,700)
 @import animations
 
+$cube-face: 200px
+
+*
+  box-sizing: border-box
+
 html, body
   font-family: 'Helvetica Neue', Helvetica, sans-serif
   margin: 0
@@ -25,6 +30,19 @@ h1
     -webkit-animation-name: expand
     -webkit-animation-duration: 3s
     -webkit-animation-timing-function: ease-out
+
+#container
+  position: absolute
+  top: 50px
+  bottom: 50px
+  left: 0
+  right: 0
+  margin: 0 auto
+  max-width: 600px
+  text-align: center
+  background: white
+  box-shadow: 5px 5px 5px #aaa
+  height: 90%
 
 section
   opacity: 0
@@ -79,6 +97,9 @@ nav#cube-nav
         background: green
 
 .cube
+  margin-left: 100px
+  margin-top: 100px
+
   &.rotate-up
     -webkit-animation-name: rotate-up
     -webkit-animation-timing-function: linear
@@ -111,45 +132,28 @@ nav#cube-nav
     -webkit-transform-style: preserve-3d
     -webkit-transform-origin: 150px 150px 0
 
-#container
-  position: absolute
-  top: 50px
-  bottom: 50px
-  left: 0
-  right: 0
-  margin: 0 auto
-  max-width: 600px
-  text-align: center
-  background: white
-  box-shadow: 5px 5px 5px #aaa
-  height: 90%
-
-#cube
-  margin-left: 100px
-  margin-top: 100px
-
+  // Cube faces
   div
     position: absolute
-    width: 300px
-    height: 300px
+    width: $cube-face
+    height: $cube-face
     border: 1px solid #ccc
     background: rgba(200, 200, 200, 0.9)
     box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.2)
     text-align: center
-    line-height: 300px
+    line-height: $cube-face
     font-size: 100px
     border-radius: 10px
 
   .face1
-    -webkit-transform: translateZ(150px)
-    z-index: 10
+    -webkit-transform: translateZ($cube-face / 2)
   .face2
-    -webkit-transform: rotateY(90deg) translateZ(150px)
+    -webkit-transform: rotateY(90deg) translateZ($cube-face / 2)
   .face3
-    -webkit-transform: rotateY(90deg) rotateX(90deg) translateZ(150px)
+    -webkit-transform: rotateY(90deg) rotateX(90deg) translateZ($cube-face / 2)
   .face4
-    -webkit-transform: rotateY(180deg) rotateZ(90deg) translateZ(150px)
+    -webkit-transform: rotateY(180deg) rotateZ(90deg) translateZ($cube-face / 2)
   .face5
-    -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ(150px)
+    -webkit-transform: rotateY(-90deg) rotateZ(90deg) translateZ($cube-face / 2)
   .face6
-    -webkit-transform: rotateX(-90deg) translateZ(150px)
+    -webkit-transform: rotateX(-90deg) translateZ($cube-face / 2)
