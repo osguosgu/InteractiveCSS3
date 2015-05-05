@@ -18,6 +18,21 @@
   100%
     -webkit-transform: rotateY(-360deg)
 
+    -webkit-transform: rotateX(360deg) rotateY(360deg)
+
+@-webkit-keyframes intro
+  0%
+    -webkit-transform: rotateX(2deg) rotateY(-50deg) scale(0.1)
+    opacity: 1
+
+
+  90%
+    opacity: 1
+
+  100%
+    -webkit-transform: rotateX(-60deg) rotateY(60deg) scale(2)
+    opacity: 0
+
 @-webkit-keyframes pulse
   0%
     background: #000
@@ -47,3 +62,19 @@
     transform: scale(0)
     text-shadow: 10px 10px 10px #000
     opacity: 0
+
+@-webkit-keyframes cromatic
+  0%
+    background-color: #FFFF00
+  15%
+    background-color: #008F59
+  30%
+    background-color: #2771B2
+  45%
+    background-color: #6E3795
+  60%
+    background-color: #FF0000
+  75%
+    background-color: #FF9201
+  100%
+    background-color: #FFFF00

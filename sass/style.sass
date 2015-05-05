@@ -10,13 +10,14 @@ $scale: 0.5
   box-sizing: border-box
 
 html, body
-  font-family: 'Helvetica Neue', Helvetica, sans-serif
+  font-family: Cookie, 'Helvetica Neue', Helvetica, sans-serif
   margin: 0
   padding: 0
+  height: 100%
 
 body
   background: #000
-  -webkit-animation-name: pulse
+  -webkit-animation-name: cromatic
   -webkit-animation-duration: 20s
   -webkit-animation-iteration-count: infinite
   -webkit-animation-timing-function: linear
@@ -31,7 +32,7 @@ body
     font-size: 24px
 
 #controls
-  position: fixed
+  position: absolute
   top: 10px
   right: 10px
   background: rgba(black, 0.9)
@@ -40,6 +41,18 @@ body
   padding: 10px
   border-radius: 10px
   border: rgba(white, 0.5) 1px solid
+  z-index: 9999
+  transition: all .2s ease-in
+
+  &.toggled
+    left: 10px
+    bottom: 10px
+    right: auto
+    top: auto
+    background: rgba(white, 0.9)
+    color: #000
+    width: 600px
+    box-shadow: 5px -5px 5px #333
 
 h1, h2, h3, h4, h5, h6
   font-family: 'Helvetica Neue', Helvetica, sans-serif
@@ -67,8 +80,6 @@ h1
   height: 90%
 
 section
-  opacity: 0
-  visibility: hidden
   position: absolute
   left: 0
   right: 0
@@ -90,6 +101,7 @@ nav#main-nav
       border-radius: 4px
       cursor: pointer
       transition: all .2s ease-in
+      text-align: center
 
       &:hover
         background: green
@@ -100,31 +112,36 @@ nav#cube-nav
     li.button
       display: inline-block
       list-style-type: none
-      background: black
-      height: 80px
-      width: 80px
+      background: #333
+      height: 60px
+      width: 60px
       margin: 2px
       color: white
       transition: all .2s ease-in
       border-radius: 80px
-      line-height: 80px
-      box-shadow: 10px 10px 10px #ddd
+      line-height: 60px
+      box-shadow: 5px 5px 0px #555
       cursor: pointer
+      text-align: center
+      font-size: 24px
 
       &:hover
         background: #666
-        transform: translate(0, -5%)
+        transform: translate(5%, 0%)
 
       &.active
         background: green
 
+      .toggled &
+        border-radius: 5px
+        background: #eee
+        color: #000
 
 #stage
   width: 100%
-  height: 400px
+  height: 100%
   -webkit-transition: -webkit-transform 0.5s
   -webkit-transform-style: preserve-3d
-  -webkit-transform: translateZ(-200px)
   margin: 0 auto
   position: relative
   -webkit-perspective: 800
@@ -133,6 +150,8 @@ nav#cube-nav
   &:hover div
     color: rgba(white, 0.8)
 
+  div
+    color: #000
 
 .shape
   position: absolute
@@ -177,7 +196,8 @@ nav#cube-nav
     background: rgba(yellow, 0.8)
 
 .cube
-  -webkit-animation: rotate-up-left 8s infinite linear
+  -webkit-animation: rotate-up-left 10s infinite linear
+  //-webkit-animation: rotate-up-left 8s infinite linear
 
 
 
@@ -274,4 +294,159 @@ nav#cube-nav
       -webkit-transform: rotateY(240deg) translateZ($translate) scale($scale)
     .face6
       -webkit-transform: rotateY(300deg) translateZ($translate) scale($scale)
+
+
+.velocity-cube
+  margin:30% auto
+  width:10em
+  height:10em
+  transform-style:preserve-3d
+  transform-origin:50% 50% -5em
+  position:relative
+  transform:rotateX(-45deg)
+
+.velocity-cube div
+  position:absolute
+  width:10em
+  height:10em
+  background-color:#4c4c4c
+  transform-style:preserve-3d
+  backface-visibility:hidden
+
+.boxCorner2
+  transform:rotateX(180deg) translateZ(10em)
+
+.boxCorner1::before, .boxCorner1::after, .boxCorner2::before, .boxCorner2::after
+  position: absolute
+  content: ''
+  display: block
+  width: 100%
+  height: 100%
+  transform-style: preserve-3d
+
+.boxCorner1::before, .boxCorner2::before
+  transform: rotateY(90deg)
+  transform-origin: 0 50%
+  background-color: #444
+
+
+.boxCorner2::before
+  transform-origin: 100% 50%
+  transform: rotateY(-90deg)
+
+.boxCorner1::after, .boxCorner2::after
+  transform: rotateX(-90deg)
+  transform-origin: 50% 0
+  background-color: #555
+
+$foreground-color: #b85b3f
+
+//black;
+$background-color: #e8e3c7
+
+//white
+$shadow-color: #ba9186
+
+//$foreground-color;
+$distance: 8px
+$cut-distance: 3px
+
+//$distance/4;
+$strips-size: 6px
+
+//10px
+$strips-ratio: 50%
+
+//70%
+$strips-angle: 45deg
+
+//90deg;
+
+//cray stuff yo. be sure to try (if you please)
+$animate: true
+
+//true
+$fixed: false
+
+#intro
+  position: absolute
+  top: 100px
+  left: 0
+  right: 0
+  font-family: 'Cookie',cursive
+  font-size: 120pt
+  background: $background-color
+  width: 600px
+  height: 200px
+  box-shadow: #555 10px 10px 10px
+  border-radius: 10px
+  -webkit-animation: intro 10s linear
+  opacity: 0
+  z-index: 9999
+
+.dashed-shadow
+  position: relative
+  top: $distance
+  left: $distance
+  display: inline-block
+  color: $shadow-color
+  border-radius: 10px
+
+
+@keyframes dash-animation
+  0%
+    background-position: 0 0
+  100%
+    background-position: 100% 0
+
+
+.dashed-shadow:before
+  border-radius: 10px
+  content: " "
+  display: block
+  position: absolute
+  $bleeding-horizontal: 10px
+  $bleeding-vertical: 0px
+  top: -$bleeding-vertical - $distance
+  left: -$bleeding-vertical - $distance
+  bottom: -$bleeding-horizontal + $distance
+  right: -$bleeding-horizontal + $distance
+  z-index: 1
+  $color: $background-color
+  $size: $strips-ratio / 2
+  $halfSize: $size / 2
+  $p1: $halfSize
+  $p2: 50% - $halfSize
+  $p3: 50% + $halfSize
+  $p4: 100% - $halfSize
+  $transparent: transparentize($color, 1)
+  background-image: linear-gradient($strips-angle, $color $p1, $transparent $p1, $transparent $p2, $color $p2, $color $p3, $transparent $p3, $transparent $p4, $color $p4)
+  background-size: $strips-size $strips-size
+  @if $animate
+    animation: dash-animation 30s infinite linear
+  @if $fixed
+    background-attachment: fixed
+
+.dashed-shadow:hover:before
+  animation: dash-animation 30s infinite linear
+
+.dashed-shadow:after
+  border-radius: 10px
+  z-index: 2
+  content: attr(data-text)
+  position: absolute
+  left: -$distance
+  top: -$distance
+  color: $foreground-color
+  text-shadow: $cut-distance $cut-distance $background-color
+
+
+@media screen and (max-width: 1000px)
+  body
+    -webkit-animation: none
+  .cube
+    display: none
+
+  #controls
+    background: #f66
 
